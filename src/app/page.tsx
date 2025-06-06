@@ -1,32 +1,87 @@
-import { Grid, Paper, Skeleton, Toolbar } from "@mui/material";
+import { Grid, Paper, Toolbar, Typography } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 export const there = createTheme({});
+
+function createData(
+  author: string,
+  title: string,
+  views: number,
+  favorite: boolean
+) {
+  return { author, title, views, favorite };
+}
+
+const rows = [
+  createData("Shina", "Rainbow Factory", 5, true),
+  createData("Александр Заречнев", "Сегодня", 2000, true),
+  createData("Заречнев aka Саня", "Трудный возраст", 100500, true),
+  createData("Cupcake", "Remix", 3.7, true),
+];
 
 export default function Home() {
   return (
     <Box sx={{ flexGrow: 1, height: "93%" }}>
       <AppBar position="static">
-        <Toolbar></Toolbar>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Music API
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
       </AppBar>
       <Paper sx={{ p: 1, width: "100%", height: "100%" }}>
         <PageContainer>
-          <Grid container spacing={1}>
-            <Grid size={5} />
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid size={4}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={8}>
-              <Skeleton height={100} />
+          <Grid container>
+            <Grid sx={{ height: "400px" }} size={12}>
+              <AppBar position="static">
+                <Toolbar>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Избранная музяка
+                  </Typography>
+                </Toolbar>
+              </AppBar>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Автор</TableCell>
+                      <TableCell align="right">Название</TableCell>
+                      <TableCell align="right">Просмотры</TableCell>
+                      <TableCell align="right">В подписках</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row, index) => (
+                      <TableRow
+                        key={index}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.author}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.title}
+                        </TableCell>
+                        <TableCell align="right">{row.views}</TableCell>
+                        <TableCell align="right">{row.favorite}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
           </Grid>
         </PageContainer>
