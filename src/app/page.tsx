@@ -9,9 +9,6 @@ import Button from "@mui/material/Button";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
-import { createTheme } from "@mui/material/styles";
-
-export const there = createTheme({});
 
 function createData(
   author: string,
