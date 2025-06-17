@@ -50,8 +50,16 @@ body {
 
 .dialog-header {
   width: 450px;
-  padding-left: 5px;
-  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  background-color: #3493f3;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: end;
+  width: 450px;
+  height: 80px;
   background-color: var(--MuiThemeBackground);
 }
 

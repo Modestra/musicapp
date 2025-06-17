@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@mui/material";
+
 export interface DialogConfig {
   title: string;
 }
@@ -16,12 +18,19 @@ export function AppDialog(props: DialogProps) {
   if (open) {
     return (
       <div className="dialog-block">
-        <div className="dialog-header">
-          <h6>{config.title}</h6>
+        <div className="dialog-header p-3 rounded-t-md">
+          <h6 className="text-white">{config.title}</h6>
         </div>
         <div className="dialog"></div>
-        <div className="dialog-footer">
-          <button onClick={() => onClose}></button>
+        <div className="dialog-footer p-3 rounded-b-md">
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={() => onClose()}
+          >
+            Закрыть
+          </Button>
         </div>
       </div>
     );

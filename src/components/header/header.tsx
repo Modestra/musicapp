@@ -4,13 +4,15 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import { AppDialog, DialogConfig } from "../dialog/dialog";
 import { useState } from "react";
 
-const closeDialog = () => {};
-
 export function AppHeader() {
   const [open, setOpen] = useState(false);
 
   const dialogConfig: DialogConfig = {
     title: "Мои аккаунты",
+  };
+
+  const closeDialog = () => {
+    setOpen(!open);
   };
   return (
     <>
