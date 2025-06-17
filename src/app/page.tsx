@@ -1,3 +1,5 @@
+"use client";
+
 import { Grid, Paper, Toolbar, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -5,10 +7,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
+import { AppHeader } from "@/components/header/header";
+import { useState } from "react";
 
 function createData(
   author: string,
@@ -27,16 +30,11 @@ const rows = [
 ];
 
 export default function Home() {
+  const [selectMusic, setSelectMusic] = useState({});
+
   return (
     <Box sx={{ flexGrow: 1, height: "93%" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Music API
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+      <AppHeader></AppHeader>
       <Paper sx={{ p: 1, width: "100%", height: "100%" }}>
         <PageContainer>
           <Grid container>
