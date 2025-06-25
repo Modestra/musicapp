@@ -1,3 +1,5 @@
+"use client";
+
 import { Grid, Paper, Toolbar, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -5,13 +7,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
-import { createTheme } from "@mui/material/styles";
-
-export const there = createTheme({});
+import { AppHeader } from "@/components/header/header";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function createData(
   author: string,
@@ -28,18 +29,12 @@ const rows = [
   createData("Заречнев aka Саня", "Трудный возраст", 100500, true),
   createData("Cupcake", "Remix", 3.7, true),
 ];
-
 export default function Home() {
+  //const [selectMusic, setSelectMusic] = useState({});
+
   return (
     <Box sx={{ flexGrow: 1, height: "93%" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Music API
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+      <AppHeader></AppHeader>
       <Paper sx={{ p: 1, width: "100%", height: "100%" }}>
         <PageContainer>
           <Grid container>
@@ -49,6 +44,9 @@ export default function Home() {
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Избранная музяка
                   </Typography>
+                  <IconButton color="inherit">
+                    <DeleteIcon />
+                  </IconButton>
                 </Toolbar>
               </AppBar>
               <TableContainer component={Paper}>
