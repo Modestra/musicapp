@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 export interface DialogConfig {
   title: string;
@@ -14,6 +15,7 @@ export interface DialogProps {
 
 export function AppDialog(props: DialogProps) {
   const { open, config, onClose } = props;
+  const { accounts, setAccounts } = useState([]);
 
   if (open) {
     return (

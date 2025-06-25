@@ -11,7 +11,8 @@ import { PageContainer } from "@toolpad/core/PageContainer";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import { AppHeader } from "@/components/header/header";
-import { useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function createData(
   author: string,
@@ -28,9 +29,8 @@ const rows = [
   createData("Заречнев aka Саня", "Трудный возраст", 100500, true),
   createData("Cupcake", "Remix", 3.7, true),
 ];
-
 export default function Home() {
-  const [selectMusic, setSelectMusic] = useState({});
+  //const [selectMusic, setSelectMusic] = useState({});
 
   return (
     <Box sx={{ flexGrow: 1, height: "93%" }}>
@@ -44,6 +44,9 @@ export default function Home() {
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Избранная музяка
                   </Typography>
+                  <IconButton color="inherit">
+                    <DeleteIcon />
+                  </IconButton>
                 </Toolbar>
               </AppBar>
               <TableContainer component={Paper}>
