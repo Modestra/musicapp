@@ -1,37 +1,80 @@
 import { CategoryTemplate } from "@/components/categoryList/categoryList";
+import { v4 as uuid } from 'uuid';
 
-interface Observer {
+interface IObserver {
     observerToken: string,
-    update(category: CategoryTemplate): void
+    update(tableid: string, category: CategoryTemplate): void
+    add(category: CategoryTemplate): void
     data: CategoryTemplate[]
 }
 
+const templateCatalog: CategoryTemplate = {
+    title: "Избранная музяка",
+    tableId: uuid(),
+    columns: [
+        {
+            name: "Автор",
+            columnTitle: "author",
+        },
+        {
+            name: "Название",
+            columnTitle: "title",
+        },
+        {
+            name: "Просмотры",
+            columnTitle: "views",
+        },
+        {
+            name: "В подписках",
+            columnTitle: "favorite",
+        },
+    ],
+};
+
 export class CategoryService {
-    private categoryObserver: Observer[];
+    private categoryObserver: IObserver[];
+    public editable: boolean = false;
 
     constructor() {
         this.categoryObserver = []
     }
 
-    public subscribe(fn: Observer): void {
+    public subscribe(fn: IObserver, callback: (sub: IObserver) => void): void {
         this.categoryObserver.push(fn)
+        return callback(fn)
     }
 
-    public unsubscribe(fn: Observer): void {
+    public unsubscribe(fn: IObserver): void {
         this.categoryObserver.filter((subscribe) => subscribe !== fn)
     }
 
-    public addCategory(category: CategoryTemplate) {
-        this.categoryObserver.forEach(subscriber => subscriber.update(category))
+    public updateCategory(tabletoken: string, category: CategoryTemplate) {
+        this.categoryObserver.forEach(subscriber => subscriber.update(tabletoken, category))
+    }
+
+    public createTemplate(title: string) {
+        this.categoryObserver.forEach(subscriber => subscriber.add({ ...templateCatalog, title: title }))
+    }
+
+    public setEditable(edit: boolean) {
+        this.editable = edit;
     }
 }
 
-export class Subscriber implements Observer {
+export class Subscriber implements IObserver {
     constructor(public observerToken: string, public data: CategoryTemplate[] = []) { }
 
-    update(category: CategoryTemplate) {
+    update(tabletoken: string, category: CategoryTemplate) {
+        this.data.find(category => category.tableId === tabletoken)
+        console.log(category)
+    }
+
+    add(category: CategoryTemplate): void {
         this.data.push(category)
-        console.log(this.observerToken, this.data)
+    }
+
+    public getData() {
+        return this.data;
     }
 }
 
