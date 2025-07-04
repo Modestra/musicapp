@@ -1,7 +1,7 @@
 "use client";
 import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import DehazeIcon from "@mui/icons-material/Dehaze";
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import EditIcon from "@mui/icons-material/Edit";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useState } from "react";
 import { setEdit, store } from "@/app/services/state.store";
@@ -38,9 +38,9 @@ export function AppHeader() {
               value="drugSelected"
               selected={drugInDrop}
               onChange={() => onDrugCategories()}
-              color={"error"}
+              color={"warning"}
             >
-              <DragIndicatorIcon />
+              <EditIcon />
             </ToggleButton>
           </div>
         </Toolbar>

@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useState } from "react";
 import { AddCategory } from "./addCategory";
 import { store } from "@/app/services/state.store";
@@ -59,8 +60,9 @@ const rows = [
 
 export function CategoryList() {
   const [calegoryList] = useState<CategoryTemplate[]>([favoriteCatalog]);
+  const [isEditableTables, setIsEditableTables] = useState(false);
   store.subscribe(() => {
-    console.log("Состояние обновлено", store.getState());
+    setIsEditableTables(store.getState().isEditable);
   });
   return (
     <>
@@ -80,9 +82,18 @@ export function CategoryList() {
               >
                 {table.title}
               </Typography>
-              <IconButton color="inherit">
-                <DeleteIcon />
-              </IconButton>
+              {isEditableTables ? (
+                <>
+                  <IconButton color="error">
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton color="inherit">
+                    <DragIndicatorIcon />
+                  </IconButton>
+                </>
+              ) : (
+                <></>
+              )}
             </Toolbar>
           </AppBar>
           <TableContainer component={Paper}>

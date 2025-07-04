@@ -1,17 +1,22 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
+
 const counterSlice = createSlice({
     name: 'editable',
     initialState: {
-        value: false
+        isEditable: false,
+        tablesList: []
     },
     reducers: {
         setEdit: (state) => {
-            state.value = !state.value
+            state.isEditable = !state.isEditable
         },
+        onDrugCategory: () => {
+
+        }
     }
 })
 
-export const { setEdit } = counterSlice.actions
+export const { setEdit, onDrugCategory } = counterSlice.actions
 
 export const store = configureStore({ reducer: counterSlice.reducer })
